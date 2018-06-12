@@ -30,7 +30,7 @@ public class Aluguel {
 
     private boolean verify(ResultSet result){
         try {
-            if(result.next()){
+            if (result.isBeforeFirst() ) {
                 return false;
             }
             return true;
