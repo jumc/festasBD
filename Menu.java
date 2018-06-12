@@ -75,7 +75,7 @@ public class Menu {
                 aluguel.inserirAluguel();
                 break;
             case 5:
-                MenuEmprestimos();
+                MenuEmprestimos(festa);
                 break;
             case 6:
                 //funcao produtos
@@ -92,7 +92,7 @@ public class Menu {
         }
 }
 
-    public static void MenuEmprestimos(){
+    public static void MenuEmprestimos(Festa festa){
         System.out.println("\n>> Gerenciar festas >> Selecionar festa >> Equipamentos emprestados");
         System.out.println("1) Visualizar emprestimos");
         System.out.println("2) Cadastrar emprestimos");
@@ -102,10 +102,13 @@ public class Menu {
         int i = Keyboard.readInt();
         switch (i){
             case 1:
-                // funcao visualizar
+                Emprestimos empr = new Emprestimos(festa);
+                empr.VisualizaEmprestimos();
+                MenuFestaSelecionada();
                 break;
             case 2:
                 //funcao cadastrar
+                MenuFestaSelecionada();
                 break;
             case 3:
                 MenuFestaSelecionada();

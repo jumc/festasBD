@@ -55,13 +55,8 @@ public class Organizacao {
     }
 
     private boolean verifyComOrg(String cpf){
-        ResultSet result = Database.runQuery("SELECT * FROM ORGANIZACAO WHERE FESTA = UPPER('" + festa.getNome() + "') AND EDICAO = " + festa.getEdicao()+ " AND MEMBRO = '" + cpf + "';");
-        try {
-            if (result.isBeforeFirst() ) {
-                return false;
-            }
-        } catch (Exception e){
-            return true;
+        if(membros.contains(cpf)){
+            return false;
         }
         return true;
     }
