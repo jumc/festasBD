@@ -54,7 +54,8 @@ public class Menu {
         System.out.println("6) Produtos comprados por empresa");
         System.out.println("7) Balanço financeiro");
         System.out.println("8) Recargas");
-        System.out.println("9) Voltar");
+        System.out.println("9) Gerenciar concursos");
+        System.out.println("10) Voltar");
         System.out.print("> ");
 
         Festa festa = new Festa();
@@ -76,6 +77,7 @@ public class Menu {
                 break;
             case 5:
                 MenuEmprestimos(festa);
+                MenuFestaSelecionada();
                 break;
             case 6:
                 //funcao produtos
@@ -87,6 +89,9 @@ public class Menu {
                 MenuRecarga();
                 break;
             case 9:
+                MenuConcursos(festa);
+                MenuFestaSelecionada();
+            case 10:
                 MenuFesta();
                 break;
         }
@@ -167,6 +172,36 @@ public class Menu {
         }
     }
 
+    public static void MenuConcursos(Festa festa){
+        System.out.println("\n>> Gerenciar festas >> Selecionar festa >> Gerenciar concursos");
+        System.out.println("1) Cadastrar coordenador de concurso de adivinhacao");
+        System.out.println("2) Cadastrar coordenador de concurso de quem come mais");
+        System.out.println("3) Cadastrar coordenador de concurso de fantasia");
+        System.out.println("4) Voltar");
+        System.out.print("> ");
+
+        int i = Keyboard.readInt();
+        switch (i){
+            case 1:
+                Concurso conc1 = new Concurso(festa, "ADV");
+                conc1.inserirCoordenador();
+                MenuConcursos(festa);
+                break;
+            case 2:
+                Concurso conc2 = new Concurso(festa, "COMIDA");
+                conc2.inserirCoordenador();
+                MenuConcursos(festa);
+                break;
+            case 3:
+                Concurso conc3 = new Concurso(festa, "FANTASIA");
+                conc3.inserirCoordenador();
+                MenuConcursos(festa);
+                break;
+            case 4:
+                MenuFestaSelecionada();
+        }
+    }
+
     public static void MenuPessoas(){
         System.out.println("\n>> Gerenciar pessoas");
         System.out.println("1) Cadastrar pessoa");
@@ -187,6 +222,7 @@ public class Menu {
                 break;
         }
     }
+
     public static void MenuPessoaSelecionada(){
         System.out.println("\n>> Gerenciar pessoas >> Selecionar pessoa");
         System.out.println("1) Alterar pessoa");

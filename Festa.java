@@ -3,6 +3,7 @@ public class Festa {
     private short edicao = 2;
     private float consumacao = 20.0f;
     private String playlist = "HTTPS://OPEN.SPOTIFY.COM/ALBUM/47TDLYZHFCIJ7LGIUB5AMR";
+    private short tipo = 0;
 
     public String getNome() {
         return nome;
@@ -34,5 +35,13 @@ public class Festa {
 
     public void setPlaylist(String playlist) {
         this.playlist = playlist;
+    }
+
+    public short getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(short tipo) {
+        this.tipo = tipo;
     }
 }

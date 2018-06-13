@@ -7,14 +7,14 @@ import java.util.List;
 public class Organizacao {
 
     private Festa festa;
-    private ArrayList<String> membros;
+    public ArrayList<String> membros;
 
     public Organizacao(Festa festa){
         this.festa = festa;
         membros = new ArrayList<>();
         try {
             ResultSet result = Database.runQuery("SELECT * FROM ORGANIZACAO WHERE FESTA = UPPER('" + festa.getNome() + "') AND EDICAO = " + String.valueOf(festa.getEdicao())+ ";");
-            System.out.println("Ja sao organizadores:");
+            System.out.println("Sao organizadores da festa:");
             while (result.next()) {
                 System.out.println(result.getString(1) + " ");
                 membros.add(result.getString(1));
