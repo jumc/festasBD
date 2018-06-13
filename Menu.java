@@ -99,15 +99,16 @@ public class Menu {
         System.out.println("3) Voltar");
         System.out.print("> ");
 
+        Emprestimos empr = new Emprestimos(festa);
+
         int i = Keyboard.readInt();
         switch (i){
             case 1:
-                Emprestimos empr = new Emprestimos(festa);
-                empr.VisualizaEmprestimos();
+                empr.visualizaEmprestimos();
                 MenuFestaSelecionada();
                 break;
             case 2:
-                //funcao cadastrar
+                empr.inserirEmprestimo();
                 MenuFestaSelecionada();
                 break;
             case 3:
