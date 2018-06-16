@@ -1,9 +1,9 @@
 public class Festa {
-    private String nome = "COVEN DAS BRUXAS";
-    private short edicao = 2;
-    private float consumacao = 20.0f;
-    private String playlist = "HTTPS://OPEN.SPOTIFY.COM/ALBUM/47TDLYZHFCIJ7LGIUB5AMR";
-    private short tipo = 0;
+    private String nome = "FESTA JUNINA DA CATEDRAL";
+    private short edicao = 1;
+    private float consumacao = 0.0f;
+    private String playlist = "HTTPS://OPEN.SPOTIFY.COM/USER/MREEBEE3/PLAYLIST/5XHDAAV4UXWGBVOIXLOCUZ";
+    private short tipo = 1;
 
     public String getNome() {
         return nome;

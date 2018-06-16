@@ -80,7 +80,8 @@ public class Menu {
                 MenuFestaSelecionada();
                 break;
             case 6:
-                //funcao produtos
+            	Produtos.produtosCompradosPorEmpresa(festa);
+            	MenuFestaSelecionada();
                 break;
             case 7:
                 MenuBalanco();
