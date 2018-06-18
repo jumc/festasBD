@@ -29,14 +29,18 @@ public class Menu {
         System.out.println("2) Criar festa");
         System.out.println("3) Voltar");
         System.out.print("> ");
-
+        
+        Festa festa = new Festa();
+        
         int i = Keyboard.readInt();
         switch (i){
             case 1:
                 MenuFestaSelecionada();
                 break;
             case 2:
-                //funcao criar
+            	Evento evento = new Evento(festa);
+                evento.inserirEvento();
+                MenuFesta();
                 break;
             case 3:
                 MenuPrincipal();
@@ -59,7 +63,6 @@ public class Menu {
         System.out.print("> ");
 
         Festa festa = new Festa();
-
         int i = Keyboard.readInt();
         switch (i){
             case 1:
