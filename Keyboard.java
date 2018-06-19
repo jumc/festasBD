@@ -37,7 +37,7 @@ public class Keyboard {
             System.out.println("Digite um numero (casas quebradas separadas com ponto)");
             System.out.print("> ");
             sc.nextLine();
-            return readInt();
+            return readFloat();
         }
     }
 

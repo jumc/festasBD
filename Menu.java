@@ -55,7 +55,7 @@ public class Menu {
         System.out.println("3) Inserir membro da organizacao");
         System.out.println("4) Inserir aluguel");
         System.out.println("5) Equipamentos emprestados");
-        System.out.println("6) Produtos comprados por empresa");
+        System.out.println("6) Gerenciar produtos");
         System.out.println("7) Balanço financeiro");
         System.out.println("8) Recargas");
         System.out.println("9) Gerenciar concursos");
@@ -83,7 +83,7 @@ public class Menu {
                 MenuFestaSelecionada();
                 break;
             case 6:
-            	Produtos.produtosCompradosPorEmpresa(festa);
+            	Produtos.MenuGerenciarProdutos(festa);
             	MenuFestaSelecionada();
                 break;
             case 7:
