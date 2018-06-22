@@ -90,7 +90,7 @@ public class Menu {
                 MenuBalanco();
                 break;
             case 8:
-                MenuRecarga();
+                MenuRecarga(festa);
                 break;
             case 9:
                 MenuConcursos(festa);
@@ -151,26 +151,32 @@ public class Menu {
         }
     }
 
-    public static void MenuRecarga(){
+    public static void MenuRecarga(Festa festa){
         System.out.println("\n>> Gerenciar festas >> Selecionar festa >> Recargas");
-        System.out.println("1) Recarga mÃ©dia");
-        System.out.println("2) Recarga mÃ©dia para o seu tipo de festa");
-        System.out.println("3) Volume de recargas da sua festa, por faixa de tempo");
-        System.out.println("4) Voltar");
+        System.out.println("1) Inserir recarga");
+        System.out.println("2) Recarga média da festa");
+        System.out.println("3) Recarga média para o seu tipo de festa (" +
+        		(festa.getTipo() == 0 ? "Halloween)" : "Junina)") );
+        System.out.println("4) Volume de recargas da sua festa, por faixa de tempo");
+        System.out.println("5) Voltar");
         System.out.print("> ");
 
         int i = Keyboard.readInt();
         switch (i){
-            case 1:
-                // funcao media
-                break;
+        	case 1:
+        		break;
             case 2:
-                //funcao media tipo
+                Recargas.recargaMedia(festa);
+                MenuRecarga(festa);
                 break;
             case 3:
-                //funcao recarga por tempo
+                Recargas.recargaMediaTipo(festa.getTipo());
+                MenuRecarga(festa);
                 break;
             case 4:
+                //funcao recarga por tempo
+                break;
+            case 5:
                 MenuFestaSelecionada();
                 break;
         }
