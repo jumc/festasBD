@@ -164,6 +164,8 @@ public class Menu {
         int i = Keyboard.readInt();
         switch (i){
         	case 1:
+        		Recargas.inserirRecarga(festa);
+        		MenuRecarga(festa);
         		break;
             case 2:
                 Recargas.recargaMedia(festa);
@@ -174,7 +176,8 @@ public class Menu {
                 MenuRecarga(festa);
                 break;
             case 4:
-                //funcao recarga por tempo
+                Recargas.recargaPorTempo(festa);
+                MenuRecarga(festa);
                 break;
             case 5:
                 MenuFestaSelecionada();
