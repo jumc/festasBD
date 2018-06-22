@@ -69,7 +69,8 @@ public class Menu {
                 // funcao alterar
                 break;
             case 2:
-                //funcao remover
+            	Evento evento = new Evento(festa);
+                evento.ExcluirEvento();
                 break;
             case 3:
                 //funcao organizacao
@@ -154,8 +155,8 @@ public class Menu {
     public static void MenuRecarga(Festa festa){
         System.out.println("\n>> Gerenciar festas >> Selecionar festa >> Recargas");
         System.out.println("1) Inserir recarga");
-        System.out.println("2) Recarga média da festa");
-        System.out.println("3) Recarga média para o seu tipo de festa (" +
+        System.out.println("2) Recarga mï¿½dia da festa");
+        System.out.println("3) Recarga mï¿½dia para o seu tipo de festa (" +
         		(festa.getTipo() == 0 ? "Halloween)" : "Junina)") );
         System.out.println("4) Volume de recargas da sua festa, por faixa de tempo");
         System.out.println("5) Voltar");

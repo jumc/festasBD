@@ -1,5 +1,6 @@
 import javax.xml.transform.Result;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 
@@ -89,5 +90,50 @@ public class Evento {
 	            }
 	    }
 
+		public void ExcluirEvento()
+		{
+			
+        	System.out.println("Festas:");
+    		System.out.println("TIPO\tEDICAO\tNOME");
+    		ResultSet result = Database.runQuery("SELECT NOME, EDICAO, TIPO FROM FESTA");
+    		try {
+    			    			if (!result.isBeforeFirst() ) {
+    			    System.out.println("Nenhuma festa encontrada.");
+    			    return;
+    			}
+    	        ResultSetMetaData rsmd = result.getMetaData();
+    	        int columnsNumber = rsmd.getColumnCount();
+    	        
+    	        		int contador=0;
+    	        while (result.next()) {
+    	            	contador++;
+    	                
+    	                if(result.getInt(3)==1)System.out.print("JUNINA");
+    	                else System.out.print("HALLOW");
+    	                System.out.print("\t" + (result.getInt(2)));
+    	                System.out.print("\t" + result.getString(1));
+    	        
+    	                  	            
+    	            System.out.println("");
+    	        }
+    	        
+    			
+    		} catch (SQLException e) {
+    			System.out.println("Erro Festa nao localizada.");
+    		}
+    		System.out.println("Digite o nome da Festa a ser removida: ");
+            System.out.print("> ");
+            nome = Keyboard.readLine();
+            System.out.println("Digite a edicao da Festa:" +nome+"");
+            System.out.print("> ");
+            edicao = Keyboard.readInt();
+            int n = Database.runUpdate("DELETE FROM FESTA WHERE NOME=UPPER('"+nome+"') AND EDICAO ="+edicao+"");
+            if (n!=0) {
+    			System.out.println("Festa excluída com sucesso.");
+    		}
+    		else {
+    		System.out.println("Falha ao excluir Festa.");
+    		}
+		}
 		
 }
