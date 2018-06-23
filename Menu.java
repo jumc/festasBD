@@ -63,13 +63,13 @@ public class Menu {
         System.out.print("> ");
 
         Festa festa = new Festa();
+        Evento evento = new Evento(festa);
         int i = Keyboard.readInt();
         switch (i){
             case 1:
-                // funcao alterar
+            	evento.AlterarEvento();
                 break;
             case 2:
-            	Evento evento = new Evento(festa);
                 evento.ExcluirEvento();
                 break;
             case 3:

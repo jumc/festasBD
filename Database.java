@@ -1,8 +1,4 @@
 import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 // Tem q instalar o driver jdbc do postgre e colocar o jar dele no projeto para funcionar
 
@@ -11,7 +7,7 @@ public class Database {
 	static private Connection db = null;
 	static private String HOST = "jdbc:postgresql://localhost:5432/T3BD";
 	static private String USER = "postgres";
-	static private String PASS = "password";
+	static private String PASS = "admin";
 	static private Statement stmt = null;
 	
 	public static boolean open() {
@@ -67,4 +63,5 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
+
 }
