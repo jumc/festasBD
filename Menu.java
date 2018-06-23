@@ -68,6 +68,7 @@ public class Menu {
         switch (i){
             case 1:
             	evento.AlterarEvento();
+            	MenuFestaSelecionada();
                 break;
             case 2:
                 evento.ExcluirEvento();
@@ -219,19 +220,27 @@ public class Menu {
     public static void MenuPessoas(){
         System.out.println("\n>> Gerenciar pessoas");
         System.out.println("1) Cadastrar pessoa");
-        System.out.println("2) Selecionar pessoa");
-        System.out.println("3) Voltar");
+        System.out.println("2) Listar pessoas");
+        System.out.println("3) Excluir pessoa");
+        System.out.println("4) Voltar");
         System.out.print("> ");
 
+        Membros mem = new Membros();
         int i = Keyboard.readInt();
         switch (i){
             case 1:
-                // funcao cadastrar
+            	mem.inserirMembro();
+            	MenuPessoas();
                 break;
             case 2:
-                // funcao selecionar
+                mem.listarMembros();
+                MenuPessoas();
                 break;
             case 3:
+            	mem.excluirMembro();
+                MenuPrincipal();
+                break;
+            case 4:
                 MenuPrincipal();
                 break;
         }

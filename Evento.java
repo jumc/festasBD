@@ -151,7 +151,8 @@ public class Evento {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-           }
+		}
+		
 			
 		public void AlterarEvento()
 		{ 
@@ -184,50 +185,50 @@ public class Evento {
     		System.out.println("Digite o numero da Festa a ser altera: ");
             System.out.print("> ");
             busca = Keyboard.readInt();
-            /*
+            
     		ResultSet busc = Database.runQuery("SELECT NOME,EDICAO,CONSUMACAO,TIPO,PLAYLIST FROM FESTA");
             try {
             	
             	int contador=1;
 				while(busc.next()) {
 						if(busca == contador) {
-						//	do {
-						//	System.out.println("Alterar o nome da Festa: "+busc.getString(1));
-				         //   System.out.print("> ");
-				         //   nome = Keyboard.readLine();
-				         //   System.out.println("Alterar a edicao da Festa: "+busc.getInt(2));
-				         //   System.out.print("> ");
-				         //   edicao = Keyboard.readInt();
-				         //   } while(verifyFesta() == true);
-				        System.out.println("Alterar a consumacao da Festa: "+busc.getInt(3));
-				        System.out.print("> ");
-				        consumacao = Keyboard.readInt();
-				        //System.out.println("Alterar o tipo da Festa: "+busc.getInt(4));
-				        //System.out.print("> ");
-				        //tipo = Keyboard.readInt();
-				        System.out.println("Alterar a playlist musical da Festa: "+busc.getString(5));
-				        System.out.print("> ");
-				        playlist = Keyboard.readLine();
-				        nome_aux=busc.getString(1);
-						Database.runUpdate("UPDATE FESTA SET CONSUMACAO="+consumacao+" WHERE NOME="+nome_aux+";");
-						 	if (n!=0) {
+							do {
+							System.out.println("Alterar o nome da Festa: "+busc.getString(1));
+				            System.out.print("> ");
+				            nome = Keyboard.readLine();
+				            System.out.println("Alterar a edicao da Festa: "+busc.getInt(2));
+				            System.out.print("> ");
+				           edicao = Keyboard.readInt();
+				            } while(verifyFesta() == true);
+								System.out.println("Alterar a consumacao da Festa: "+busc.getInt(3));
+								System.out.print("> ");
+								consumacao = Keyboard.readInt();
+								//System.out.println("Alterar o tipo da Festa: "+busc.getInt(4));
+								//System.out.print("> ");
+								//tipo = Keyboard.readInt();
+								System.out.println("Alterar a playlist musical da Festa: "+busc.getString(5));
+								System.out.print("> ");
+								playlist = Keyboard.readLine();
+								nome_aux=busc.getString(1);
+								int n = Database.runUpdate("UPDATE FESTA SET NOME=UPPER('"+nome+"'),CONSUMACAO="+consumacao+" WHERE NOME='"+nome_aux+"' AND EDICAO="+edicao+";");
+								if (n!=0) {
 									System.out.println("Festa ["+contador+"] alteda com sucesso.");
 									
 									}
 								else {
-									System.out.println("Falha ao alterar Festa.");
+									System.out.println("Falha ao alterar Festa ["+contador+"].");
 									}
 								
 								break;
-								} 
+								}
 						contador++;
 						
-				} */
-				AlterarEvento();
-		//	} catch (SQLException e) {
+				} 
+				
+			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-		//		e.printStackTrace();
-		//	}
+			e.printStackTrace();
+			}
 
 		}
 
