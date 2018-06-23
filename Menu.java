@@ -222,7 +222,8 @@ public class Menu {
         System.out.println("1) Cadastrar pessoa");
         System.out.println("2) Listar pessoas");
         System.out.println("3) Excluir pessoa");
-        System.out.println("4) Voltar");
+        System.out.println("4) Alterar pessoa");
+        System.out.println("5) Voltar");
         System.out.print("> ");
 
         Membros mem = new Membros();
@@ -238,11 +239,15 @@ public class Menu {
                 break;
             case 3:
             	mem.excluirMembro();
-                MenuPrincipal();
+            	MenuPessoas();
                 break;
             case 4:
-                MenuPrincipal();
+            	mem.alterarMembro();
+            	MenuPessoas();
                 break;
+            case 5:
+            	MenuPessoas();
+            	break;
         }
     }
 
