@@ -124,7 +124,7 @@ public class Membros {
 		System.out.println("Digite o CPF da pessoa que deseja alterar: ");
 		System.out.print("> ");
         cpf = Keyboard.readLine();
-		}while(verifyMembro()==true);
+		}while(verifyMembro()!=true);
         System.out.println("Selecione o campo que deseja alterar: ");
         System.out.println("1) CPF");
         System.out.println("2) EMAIL");
@@ -139,11 +139,11 @@ public class Membros {
         	System.out.println("Informe o novo CPF: ");
         	System.out.print("> ");
         	cpf_aux = Keyboard.readLine();
-        	n = Database.runUpdate("UPDATE MEMBRO_COMISSAO SET CPF=UPPER('"+cpf_aux+"') WHERE cpf='"+cpf+"';");
+        	n = Database.runUpdate("UPDATE MEMBRO_COMISSAO SET CPF=UPPER('"+cpf_aux+"') WHERE CPF='"+cpf+"';");
 			if (n!=0) 
-				System.out.println("CPF alterado com sucesso.");
+				System.out.println("CPF editado com sucesso.");
 			else 
-				System.out.println("Falha ao alterar CPF.");
+				System.out.println("Falha ao editar CPF.");
 				
             break;
         case 2:
@@ -152,9 +152,9 @@ public class Membros {
         	email = Keyboard.readLine();
         	n = Database.runUpdate("UPDATE MEMBRO_COMISSAO SET EMAIL=UPPER('"+email+"') WHERE cpf='"+cpf+"';");
 			if (n!=0) 
-				System.out.println("Email alterado com sucesso.");
+				System.out.println("Email editado com sucesso.");
 			else 
-				System.out.println("Falha ao alterar Email.");
+				System.out.println("Falha ao editar Email.");
 				
             break;
         case 3:
@@ -163,9 +163,9 @@ public class Membros {
         	nome = Keyboard.readLine();
         	n = Database.runUpdate("UPDATE MEMBRO_COMISSAO SET NOME=UPPER('"+nome+"') WHERE cpf='"+cpf+"';");
 			if (n!=0) 
-				System.out.println("Nome alterado com sucesso.");
+				System.out.println("Nome editado com sucesso.");
 			else 
-				System.out.println("Falha ao alterar Nome.");
+				System.out.println("Falha ao editar Nome.");
 				
             break;
         case 4:
@@ -174,9 +174,9 @@ public class Membros {
         	telefone = Keyboard.readLine();
         	n = Database.runUpdate("UPDATE MEMBRO_COMISSAO SET TELEFONE=UPPER('"+telefone+"') WHERE cpf='"+cpf+"';");
 			if (n!=0) 
-				System.out.println("Telefone alterado com sucesso.");
+				System.out.println("Telefone editado com sucesso.");
 			else 
-				System.out.println("Falha ao alterar Telefone.");
+				System.out.println("Falha ao editar Telefone.");
 				
             break;
             
