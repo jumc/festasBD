@@ -73,7 +73,8 @@ public class Membros {
 	public void listarMembros()
 	{
 		System.out.println("Pessoas:");
-		System.out.println("Nº\tCPF\tEMAIL\tNOME\tTELEFONE");
+		
+		System.out.println("Nº\tCPF\t\tEMAIL\t\t\tNOME\t\t\tTELEFONE");
 		ResultSet result = Database.runQuery("SELECT CPF, EMAIL, NOME,TELEFONE FROM MEMBRO_COMISSAO");
 		try {
 			    			if (!result.isBeforeFirst() ) {
@@ -85,10 +86,10 @@ public class Membros {
 	        while (result.next()) {
 	            	
 	            	System.out.print(contador);
-	            	System.out.print("\t" + result.getString(1));
-	                System.out.print("\t" + result.getString(2));
-	                System.out.print("\t" + result.getString(3));
-	                System.out.print("\t" + result.getString(4));
+	            	System.out.print("\t"+result.getString(1));
+	                System.out.print("\t"+result.getString(2));
+	                System.out.print("\t"+result.getString(3));
+	                System.out.print("\t\t"+result.getString(4));
 	                contador++;
 	                  	            
 	            System.out.println("");

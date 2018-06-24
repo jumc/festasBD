@@ -274,29 +274,10 @@ public class Menu {
             	MenuPessoas();
                 break;
             case 5:
-            	MenuPessoas();
+            	MenuPrincipal();
             	break;
         }
     }
 
-    public static void MenuPessoaSelecionada(){
-        System.out.println("\n>> Gerenciar pessoas >> Selecionar pessoa");
-        System.out.println("1) Alterar pessoa");
-        System.out.println("2) Remover pessoa");
-        System.out.println("3) Voltar");
-        System.out.print("> ");
-
-        int i = Keyboard.readInt();
-        switch (i){
-            case 1:
-                // funcao alterar
-                break;
-            case 2:
-                // funcao remover
-                break;
-            case 3:
-                MenuPessoas();
-                break;
-        }
-    }
+    
 }
