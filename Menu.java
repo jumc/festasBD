@@ -59,7 +59,8 @@ public class Menu {
         System.out.println("7) Balanço financeiro");
         System.out.println("8) Recargas");
         System.out.println("9) Gerenciar concursos");
-        System.out.println("10) Voltar");
+        System.out.println("10) Gerenciar barracas");
+        System.out.println("11) Voltar");
         System.out.print("> ");
 
         Festa festa = new Festa();
@@ -97,7 +98,12 @@ public class Menu {
             case 9:
                 MenuConcursos(festa);
                 MenuFestaSelecionada();
+                break;
             case 10:
+            	MenuGerenciarBarracas(festa);
+            	MenuFestaSelecionada();
+            	break;
+            case 11:
                 MenuFesta();
                 break;
         }
@@ -216,6 +222,28 @@ public class Menu {
                 MenuFestaSelecionada();
         }
     }
+    
+    public static void MenuGerenciarBarracas(Festa festa) {
+        System.out.println("\n>> Gerenciar festas >> Selecionar festa >> Gerenciar barracas");
+        System.out.println("1) Cadastrar barraca");
+        System.out.println("2) Selecionar barraca");
+        System.out.println("3) Voltar");
+        System.out.print("> ");
+
+        int i = Keyboard.readInt();
+        switch (i){
+            case 1:
+            	Barracas.cadastrarBarraca(festa);
+                MenuGerenciarBarracas(festa);
+                break;
+            case 2:
+            	Barracas.selecionarBarraca(festa);
+                MenuGerenciarBarracas(festa);
+                break;
+            case 3:
+                break;
+        }
+    }
 
     public static void MenuPessoas(){
         System.out.println("\n>> Gerenciar pessoas");
@@ -226,25 +254,25 @@ public class Menu {
         System.out.println("5) Voltar");
         System.out.print("> ");
 
-        Membros mem = new Membros();
+        //Membros mem = new Membros();
         int i = Keyboard.readInt();
         switch (i){
-            case 1:
-            	mem.inserirMembro();
-            	MenuPessoas();
-                break;
-            case 2:
-                mem.listarMembros();
-                MenuPessoas();
-                break;
-            case 3:
-            	mem.excluirMembro();
-            	MenuPessoas();
-                break;
-            case 4:
-            	mem.alterarMembro();
-            	MenuPessoas();
-                break;
+//            case 1:
+//            	mem.inserirMembro();
+//            	MenuPessoas();
+//                break;
+//            case 2:
+//                mem.listarMembros();
+//                MenuPessoas();
+//                break;
+//            case 3:
+//            	mem.excluirMembro();
+//            	MenuPessoas();
+//                break;
+//            case 4:
+//            	mem.alterarMembro();
+//            	MenuPessoas();
+//                break;
             case 5:
             	MenuPessoas();
             	break;

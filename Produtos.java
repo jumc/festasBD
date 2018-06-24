@@ -18,7 +18,7 @@ public class Produtos {
             	MenuGerenciarProdutos(festa);
                 break;
             case 2:
-            	cadastrarProduto(festa);
+            	cadastrarProduto(festa, -1); //-1 para escolher tipo
             	MenuGerenciarProdutos(festa);
                 break;
             default:
@@ -26,10 +26,10 @@ public class Produtos {
         }
     }
     
-    private static void cadastrarProduto(Festa festa) {
+    public static void cadastrarProduto(Festa festa, int tipo) {
     	String nome, fornecedor;
     	float custo;
-    	int qtd, tipo = -1;
+    	int qtd;
     	
     	System.out.println("Digite o nome do produto: ");
     	System.out.print("> ");
@@ -64,7 +64,8 @@ public class Produtos {
     }
     
     private static int insertProduto(Festa festa, String nome, String fornecedor, float custo, int qtd, int tipo) {
-    	int id = 0;
+    	int id = 0, pont = -1;
+    	float preco = -1;
     	
     	ResultSet result = Database.runQuery("SELECT MAX(ID_PRODUTO) FROM PRODUTO;");
     	try {
@@ -77,6 +78,32 @@ public class Produtos {
     	
     	int r = Database.runUpdate("INSERT INTO PRODUTO" + 
 				" VALUES ("+id+",UPPER('"+nome+"'),'"+fornecedor+"',UPPER('"+festa.getNome()+"'),"+festa.getEdicao()+","+custo+","+qtd+","+tipo+");");
+    	
+    	if (tipo == 0) { //comida
+	    	while (preco < 0) {
+		    	System.out.println("Digite o preço da comida: ");
+		    	System.out.print("> ");
+		    	preco = Keyboard.readFloat();
+		    	if (preco < 0) {
+		    		System.out.println("O preço não pode ser negativo!");
+		    	}
+	    	}
+	    	r += Database.runUpdate("INSERT INTO COMIDA" + 
+					" VALUES ("+id+","+preco+");");
+	    	
+    	} else { //prenda
+	    	while (pont < 0) {
+		    	System.out.println("Digite a pontuação da prenda: ");
+		    	System.out.print("> ");
+		    	pont = Keyboard.readInt();
+		    	if (pont < 0) {
+		    		System.out.println("A pontuação não pode ser negativa!");
+		    	}
+	    	}
+	    	r += Database.runUpdate("INSERT INTO PRENDA" + 
+					" VALUES ("+id+","+pont+");");
+	    	
+    	}
     	
     	return r;
     }
