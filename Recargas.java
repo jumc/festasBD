@@ -50,7 +50,7 @@ public class Recargas {
 	public static void recargaPorTempo(Festa festa) {
 		System.out.println("Recarga média por hora:");
 		System.out.println("HORA\tMÉDIA");
-		ResultSet result = Database.runQuery("SELECT DATE_PART('HOUR', R.HORA), AVG(VALOR)" + 
+		ResultSet result = Database.runQuery("SELECT DATE_PART('HOUR', R.HORA), SUM(VALOR)" + 
 				" FROM RECARGA R JOIN PARTICIPANTE P ON (R.PARTICIPANTE = P.COD_CARTAO)" + 
 				" WHERE (FESTA = UPPER('" + festa.getNome() + "')) AND (EDICAO = " + festa.getEdicao() + ")" + 
 				" GROUP BY DATE_PART('HOUR', R.HORA);");
