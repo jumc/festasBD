@@ -237,7 +237,7 @@ public class Menu {
                 MenuGerenciarBarracas(festa);
                 break;
             case 2:
-            	//selecionar barraca
+            	Barracas.selecionarBarraca(festa);
                 MenuGerenciarBarracas(festa);
                 break;
             case 3:

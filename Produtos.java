@@ -18,7 +18,7 @@ public class Produtos {
             	MenuGerenciarProdutos(festa);
                 break;
             case 2:
-            	cadastrarProduto(festa);
+            	cadastrarProduto(festa, -1); //-1 para escolher tipo
             	MenuGerenciarProdutos(festa);
                 break;
             default:
@@ -26,10 +26,10 @@ public class Produtos {
         }
     }
     
-    private static void cadastrarProduto(Festa festa) {
+    public static void cadastrarProduto(Festa festa, int tipo) {
     	String nome, fornecedor;
     	float custo;
-    	int qtd, tipo = -1;
+    	int qtd;
     	
     	System.out.println("Digite o nome do produto: ");
     	System.out.print("> ");

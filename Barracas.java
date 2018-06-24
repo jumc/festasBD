@@ -3,6 +3,64 @@ import java.sql.SQLException;
 
 public class Barracas {
 	
+	public static void selecionarBarraca(Festa festa) {
+		int id, tipo;
+		
+    	System.out.println("Digite o ID da barraca: ");
+    	System.out.print("> ");
+    	id = Keyboard.readInt();
+    	tipo = verifyBarraca(festa, id);
+    	if (tipo == -1) {
+    		System.out.println("Barraca não encontrada!");
+    		return;
+    	}
+    	
+    	System.out.println("Barraca encontrada!");
+    	
+    	MenuSelecionarBarraca(festa, id, tipo);
+	}
+	
+	private static void MenuSelecionarBarraca(Festa festa, int id, int tipo) {
+        System.out.println("\n>> Gerenciar festas >> Selecionar festa >> Gerenciar barracas >> Selecionar barraca");
+        System.out.println("1) Inserir responsável por barraca");
+        System.out.println("2) Inserir produto");
+        System.out.println("3) Cadastrar venda de comida");
+        System.out.println("4) Voltar");
+        System.out.print("> ");
+
+        int i = Keyboard.readInt();
+        switch (i){
+            case 1:
+            	//inserir responsavel por barraca
+            	MenuSelecionarBarraca(festa, id, tipo);
+                break;
+            case 2:
+            	Produtos.cadastrarProduto(festa, tipo);
+            	MenuSelecionarBarraca(festa, id, tipo);
+                break;
+            case 3:
+            	//cadastrar venda de comida
+            	MenuSelecionarBarraca(festa, id, tipo);
+                break;
+            case 4:
+            	break;
+        }
+	}
+	
+	private static int verifyBarraca(Festa festa, int id) {
+    	ResultSet result = Database.runQuery("SELECT TIPO FROM BARRACA WHERE (ID_BARRACA = "+id+") AND (FESTA = UPPER('" + festa.getNome() + "')) AND (EDICAO = " + festa.getEdicao() + ");");
+    	try {
+			if (result.isBeforeFirst() ) {
+				result.next();
+				return result.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	
+    	return -1;
+	}
+	
     public static void cadastrarBarraca(Festa festa) {
     	String nome, descricao;
     	int id, num = -1, tipo = -1;
@@ -90,7 +148,7 @@ public class Barracas {
     }
 
     private static boolean verifyValidNum(Festa festa, int num) {
-    	ResultSet result = Database.runQuery("SELECT ID_BARRACA FROM BARRACA WHERE NUMERO = "+num+" AND (FESTA = UPPER('" + festa.getNome() + "')) AND (EDICAO = " + festa.getEdicao() + ");");
+    	ResultSet result = Database.runQuery("SELECT ID_BARRACA FROM BARRACA WHERE (NUMERO = "+num+") AND (FESTA = UPPER('" + festa.getNome() + "')) AND (EDICAO = " + festa.getEdicao() + ");");
     	try {
 			if (!result.isBeforeFirst() ) {
 				return true;
