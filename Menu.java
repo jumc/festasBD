@@ -254,25 +254,25 @@ public class Menu {
         System.out.println("5) Voltar");
         System.out.print("> ");
 
-        //Membros mem = new Membros();
+        Membros mem = new Membros();
         int i = Keyboard.readInt();
         switch (i){
-//            case 1:
-//            	mem.inserirMembro();
-//            	MenuPessoas();
-//                break;
-//            case 2:
-//                mem.listarMembros();
-//                MenuPessoas();
-//                break;
-//            case 3:
-//            	mem.excluirMembro();
-//            	MenuPessoas();
-//                break;
-//            case 4:
-//            	mem.alterarMembro();
-//            	MenuPessoas();
-//                break;
+            case 1:
+            	mem.inserirMembro();
+            	MenuPessoas();
+                break;
+            case 2:
+                mem.listarMembros();
+                MenuPessoas();
+                break;
+            case 3:
+            	mem.excluirMembro();
+            	MenuPessoas();
+                break;
+            case 4:
+            	mem.alterarMembro();
+            	MenuPessoas();
+                break;
             case 5:
             	MenuPessoas();
             	break;

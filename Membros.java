@@ -131,7 +131,7 @@ public class Membros {
         System.out.println("3) NOME");
         System.out.println("4) TELEFONE");
         System.out.println("5) Voltar");
-        System.out.print("> "); //email, nome ,telefone
+        System.out.print("> "); 
         campo = Keyboard.readInt();
         int n;
         switch (campo){
