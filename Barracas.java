@@ -24,11 +24,20 @@ public class Barracas {
         System.out.println("\n>> Gerenciar festas >> Selecionar festa >> Gerenciar barracas >> Selecionar barraca");
         System.out.println("1) Inserir responsável por barraca");
         System.out.println("2) Inserir produto");
-        System.out.println("3) Cadastrar venda de comida");
-        System.out.println("4) Voltar");
-        System.out.print("> ");
+        switch (tipo) {
+        	case 0:
+                System.out.println("3) Cadastrar venda de comida");
+                System.out.println("4) Voltar");
+                System.out.print("> ");
+                break;
+        	case 1: default:
+                System.out.println("3) Voltar");
+                System.out.print("> ");
+        }
+
 
         int i = Keyboard.readInt();
+        i = (tipo != 0 && i == 3) ? ++i : i;	//se tipo nao for comida nao tem opcao de cadastrar comida
         switch (i){
             case 1:
             	//inserir responsavel por barraca
@@ -107,7 +116,7 @@ public class Barracas {
 	    	tipo--;
     	}
     	
-    	insertBarraca(festa, id, num, nome, descricao, tipo);
+    	insertBarraca(festa, id, num, nome.toUpperCase(), descricao.toUpperCase(), tipo);
     }
     
     private static int insertBarraca(Festa festa, int id, int num, String nome, String descricao, int tipo) {
