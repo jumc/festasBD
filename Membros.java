@@ -173,7 +173,7 @@ public class Membros {
         	System.out.println("Informe o novo Telefone: ");
         	System.out.print("> ");
         	telefone = Keyboard.readLine();
-        	n = Database.runUpdate("UPDATE MEMBRO_COMISSAO SET TELEFONE=UPPER('"+telefone+"') WHERE cpf='"+cpf+"';");
+        	n = Database.runUpdate("UPDATE MEMBRO_COMISSAO SET TELEFONE='"+telefone+"' WHERE cpf='"+cpf+"';");
 			if (n!=0) 
 				System.out.println("Telefone editado com sucesso.");
 			else 
