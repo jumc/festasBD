@@ -153,6 +153,7 @@ public class Menu {
                 MenuBalanco();
                 break;
             case 3:
+                //Balanco.Arrecadacao();
                 MenuBalanco();
                 break;
             case 4:
