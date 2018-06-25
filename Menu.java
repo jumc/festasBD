@@ -1,3 +1,5 @@
+import com.oracle.xmlns.internal.webservices.jaxws_databinding.ExistingAnnotationsType;
+
 public class Menu {
 
     public static void MenuPrincipal(){
@@ -10,6 +12,7 @@ public class Menu {
         System.out.println("SELECIONE O QUE DESEJA FAZER APERTANDO O NUMERO CORRESPONDENTE \n");
         System.out.println("1) Gerenciar festas");
         System.out.println("2) Gerenciar pessoas");
+        System.out.println("3) Sair");
         System.out.print("> ");
 
         int i = Keyboard.readInt();
@@ -20,6 +23,8 @@ public class Menu {
             case 2:
                 MenuPessoas();
                 break;
+            case 3:
+            	System.exit(0);
         }
     }
 
@@ -73,6 +78,7 @@ public class Menu {
                 break;
             case 2:
                 evento.ExcluirEvento();
+                MenuFestaSelecionada();
                 break;
             case 3:
                 //funcao organizacao
@@ -80,6 +86,7 @@ public class Menu {
             case 4:
                 Aluguel aluguel = new Aluguel(festa);
                 aluguel.inserirAluguel();
+                MenuFestaSelecionada();
                 break;
             case 5:
                 MenuEmprestimos(festa);
@@ -145,13 +152,16 @@ public class Menu {
         int i = Keyboard.readInt();
         switch (i){
             case 1:
-                // funcao saldo
+                Balanco.saldoFinal();
+                MenuBalanco();
                 break;
             case 2:
-                //funcao despesas
+                Balanco.despesasPorServico();
+                MenuBalanco();
                 break;
             case 3:
-                //funcao arrecadacao
+                //Balanco.Arrecadacao();
+                MenuBalanco();
                 break;
             case 4:
                 MenuFestaSelecionada();
