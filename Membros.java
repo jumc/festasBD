@@ -1,18 +1,13 @@
-import javax.xml.transform.Result;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class Membros {
 	private String cpf_aux,cpf, email, nome, telefone;
-	private Festa festa;
 	int campo;
 	
-	public void Membros(Festa festa) {
-		this.festa=festa;
-		
-	}
+	public Membros() {}
+
+	
 	public void getInfo()
 	{
 			do {

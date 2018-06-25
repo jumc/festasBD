@@ -1,14 +1,10 @@
-import javax.xml.transform.Result;
-
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 
 public class Evento {
 		private int edicao, tipo, consumacao;
-		private String nome,nome_aux, playlist;
+		private String nome, playlist;
 		private Festa festa;
 		int busca,campo;
 		
@@ -93,67 +89,12 @@ public class Evento {
 	            }
 	    }
 
-		public void ExcluirEvento()
+		public int ExcluirEvento(Festa festa)
 		{
-			
-        	System.out.println("Festas:");
-    		System.out.println("Nº\tTIPO\tEDICAO\tNOME");
-    		ResultSet result = Database.runQuery("SELECT NOME, EDICAO, TIPO FROM FESTA");
-    		try {
-    			    			if (!result.isBeforeFirst() ) {
-    			    System.out.println("Nenhuma festa encontrada.");
-    			    return;
-    			}
-    	        	        
-    	        		int contador=1;
-    	        while (result.next()) {
-    	            	
-    	            	System.out.print(contador);
-    	                if(result.getInt(3)==1)System.out.print("\tJUNINA");
-    	                else System.out.print("\tHALLOW");
-    	                System.out.print("\t" + (result.getInt(2)));
-    	                System.out.print("\t" + result.getString(1));
-    	                contador++;
-    	                  	            
-    	            System.out.println("");
-    	        }
-    	        
-    			
-    		} catch (SQLException e) {
-    			System.out.println("Erro Festa nao localizada.");
-    		}
-    		System.out.println("Digite o numero da Festa a ser removida: ");
-            System.out.print("> ");
-            busca = Keyboard.readInt();
-            //System.out.println("Digite a edicao da Festa:" +nome+"");
-            //System.out.print("> ");
-            //edicao = Keyboard.readInt();
-            ResultSet busc = Database.runQuery("SELECT NOME, EDICAO FROM FESTA");
-            try {
-            		int contador=1;
-				while(busc.next()) {
-						if(busca == contador) {
-						int n = Database.runUpdate("DELETE FROM FESTA WHERE NOME=UPPER('"+busc.getString(1)+"') AND EDICAO ="+busc.getInt(2)+"");
-								if (n!=0) {
-									System.out.println("Festa ["+contador+"] excluída com sucesso.");
-									
-									}
-								else {
-									System.out.println("Falha ao excluir Festa.");
-									}
-								break;
-								}
-						contador++;
-						
-							}
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			return Database.runUpdate("DELETE FROM FESTA WHERE NOME=UPPER('"+festa.getNome()+"') AND EDICAO ='"+festa.getEdicao()+"';");
 		}
 		
-		public void listarEvento()
+		public static void listarEvento()
 		{
 			System.out.println("Festas:");
     		System.out.println("Nº\tTIPO\tEDICAO\tNOME");
@@ -184,10 +125,79 @@ public class Evento {
 		
 		}
 			
-		public void AlterarEvento()
+		public void AlterarEvento(Festa festa)
 		{ 
+
+			try {			
+		        System.out.println("Selecione o campo que deseja alterar: ");
+		        System.out.println("1) NOME");
+		        System.out.println("2) EDICAO");
+		        System.out.println("3) CONSUMACAO");
+		        System.out.println("4) PLAYLIST");
+		        System.out.println("5) Voltar");
+		        System.out.print("> "); 
+		        campo = Keyboard.readInt();
+		        int n;
+		        switch (campo){
+		        case 1:
+		        	System.out.println("Informe o novo Nome: ");
+		        	System.out.print("> ");
+		        	nome = Keyboard.readLine();
+		        	n = Database.runUpdate("UPDATE FESTA SET NOME=UPPER('"+nome+"') WHERE NOME=UPPER('"+festa.getNome()+"') AND EDICAO='"+festa.getEdicao()+"';");
+					if (n!=0) 
+						System.out.println("Nome editada com sucesso.");
+					else 
+						System.out.println("Falha ao editar Nome.");
+						
+		            break;
+		        case 2:
+		        	System.out.println("Informe o novo numero de Edicao: ");
+		        	System.out.print("> ");
+		        	edicao = Keyboard.readInt();
+		        	n = Database.runUpdate("UPDATE FESTA SET EDICAO='"+edicao+"' WHERE NOME=UPPER('"+festa.getNome()+"') AND EDICAO='"+festa.getEdicao()+"';");
+					if (n!=0) 
+						System.out.println("Edicao editada com sucesso.");
+					else 
+						System.out.println("Falha ao editar Edicao.");
+						
+		            break;
+		        case 3:
+		        	System.out.println("Informe a nova Consumacao: ");
+		        	System.out.print("> ");
+		        	consumacao = Keyboard.readInt();
+		        	n = Database.runUpdate("UPDATE FESTA SET CONSUMACAO='"+consumacao+"'ss WHERE NOME=UPPER('"+festa.getNome()+"') AND EDICAO='"+festa.getEdicao()+"';");
+					if (n!=0) 
+						System.out.println("Consumacao editada com sucesso.");
+					else 
+						System.out.println("Falha ao editar Consumacao.");
+						
+		            break;
+		        case 4:
+		        	System.out.println("Informe a nova Playlist: ");
+		        	System.out.print("> ");
+		        	playlist = Keyboard.readLine();
+		        	n = Database.runUpdate("UPDATE FESTA SET PLAYLIST='"+playlist+"' WHERE NOME=UPPER('"+festa.getNome()+"') AND EDICAO='"+festa.getEdicao()+"';");
+					if (n!=0) 
+						System.out.println("Playlist editada com sucesso.");
+					else 
+						System.out.println("Falha ao editar Playlist.");
+						
+		            break;
+		
+		        }    
+				
+			} catch (Exception e) {
+				System.out.println("Falha localizar Festas.");
+			e.printStackTrace();
+			}
+
+		}
+		
+		public static void selecionarFesta(Festa festa)
+		{ 
+			int busca;
 			listarEvento();
-    		System.out.println("Digite o numero da Festa a ser altera: ");
+    		System.out.println("Digite o numero da Festa: ");
             System.out.print("> ");
             busca = Keyboard.readInt();
             
@@ -197,69 +207,13 @@ public class Evento {
             	int contador=1;
 				while(busc.next()) {
 						if(busca == contador) {
-							
-								
-						        System.out.println("Selecione o campo que deseja alterar: ");
-						        System.out.println("1) NOME");
-						        System.out.println("2) EDICAO");
-						        System.out.println("3) CONSUMACAO");
-						        System.out.println("4) PLAYLIST");
-						        System.out.println("5) Voltar");
-						        System.out.print("> "); 
-						        campo = Keyboard.readInt();
-						        int n;
-						        switch (campo){
-						        case 1:
-						        	System.out.println("Informe o novo Nome: ");
-						        	System.out.print("> ");
-						        	nome = Keyboard.readLine();
-						        	n = Database.runUpdate("UPDATE FESTA SET NOME=UPPER('"+nome+"') WHERE NOME='"+busc.getString(1)+"' AND EDICAO='"+busc.getInt(2)+"';");
-									if (n!=0) 
-										System.out.println("Nome editada com sucesso.");
-									else 
-										System.out.println("Falha ao editar Nome.");
-										
-						            break;
-						        case 2:
-						        	System.out.println("Informe o novo numero de Edicao: ");
-						        	System.out.print("> ");
-						        	edicao = Keyboard.readInt();
-						        	n = Database.runUpdate("UPDATE FESTA SET EDICAO='"+edicao+"' WHERE NOME='"+busc.getString(1)+"' AND EDICAO='"+busc.getInt(2)+"';");
-									if (n!=0) 
-										System.out.println("Edicao editada com sucesso.");
-									else 
-										System.out.println("Falha ao editar Edicao.");
-										
-						            break;
-						        case 3:
-						        	System.out.println("Informe a nova Consumacao: ");
-						        	System.out.print("> ");
-						        	consumacao = Keyboard.readInt();
-						        	n = Database.runUpdate("UPDATE FESTA SET CONSUMACAO='"+consumacao+"'ss WHERE NOME='"+busc.getString(1)+"' AND EDICAO='"+busc.getInt(2)+"';");
-									if (n!=0) 
-										System.out.println("Consumacao editada com sucesso.");
-									else 
-										System.out.println("Falha ao editar Consumacao.");
-										
-						            break;
-						        case 4:
-						        	System.out.println("Informe a nova Playlist: ");
-						        	System.out.print("> ");
-						        	playlist = Keyboard.readLine();
-						        	n = Database.runUpdate("UPDATE FESTA SET PLAYLIST='"+playlist+"' WHERE NOME='"+busc.getString(1)+"' AND EDICAO='"+busc.getInt(2)+"';");
-									if (n!=0) 
-										System.out.println("Playlist editada com sucesso.");
-									else 
-										System.out.println("Falha ao editar Playlist.");
-										
-						            break;
-		
-						        }
-								
-						        break;
-								}
-							
-						contador++;	
+							festa.setNome(busc.getString(1));
+							festa.setEdicao(busc.getShort(2));
+							festa.setConsumacao(busc.getFloat(3));
+							festa.setTipo(busc.getShort(4));
+							festa.setPlaylist(busc.getString(5));
+				        }
+					++contador;	
 				} 
 				
 			} catch (SQLException e) {

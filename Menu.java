@@ -1,4 +1,4 @@
-import com.oracle.xmlns.internal.webservices.jaxws_databinding.ExistingAnnotationsType;
+
 
 public class Menu {
 
@@ -40,7 +40,9 @@ public class Menu {
         int i = Keyboard.readInt();
         switch (i){
             case 1:
-                MenuFestaSelecionada();
+                
+                Evento.selecionarFesta(festa);
+                MenuFestaSelecionada(festa);
                 break;
             case 2:
             	Evento evento = new Evento(festa);
@@ -53,7 +55,7 @@ public class Menu {
         }
     }
 
-    public static void MenuFestaSelecionada(){
+    public static void MenuFestaSelecionada(Festa festa){
         System.out.println("\n>> Gerenciar festas >> Selecionar festa");
         System.out.println("1) Alterar festa");
         System.out.println("2) Remover festa");
@@ -68,47 +70,51 @@ public class Menu {
         System.out.println("11) Voltar");
         System.out.print("> ");
 
-        Festa festa = new Festa();
         Evento evento = new Evento(festa);
         int i = Keyboard.readInt();
         switch (i){
             case 1:
-            	evento.AlterarEvento();
-            	MenuFestaSelecionada();
+            	evento.AlterarEvento(festa);
+            	MenuFestaSelecionada(festa);
                 break;
             case 2:
-                evento.ExcluirEvento();
-                MenuFestaSelecionada();
+                if (evento.ExcluirEvento(festa) > 0)
+                	System.out.println("Festa excluida!");
+                else
+                	System.out.println("Nao foi possivel excluir a festa!");
+                MenuFesta();
                 break;
             case 3:
-                //funcao organizacao
+            	Organizacao org = new Organizacao(festa);
+            	org.inserirMembroOrganizacao();
+            	MenuFestaSelecionada(festa);
                 break;
             case 4:
                 Aluguel aluguel = new Aluguel(festa);
                 aluguel.inserirAluguel();
-                MenuFestaSelecionada();
+                MenuFestaSelecionada(festa);
                 break;
             case 5:
                 MenuEmprestimos(festa);
-                MenuFestaSelecionada();
+                MenuFestaSelecionada(festa);
                 break;
             case 6:
             	Produtos.MenuGerenciarProdutos(festa);
-            	MenuFestaSelecionada();
+            	MenuFestaSelecionada(festa);
                 break;
             case 7:
-                MenuBalanco();
+                MenuBalanco(festa);
                 break;
             case 8:
                 MenuRecarga(festa);
                 break;
             case 9:
                 MenuConcursos(festa);
-                MenuFestaSelecionada();
+                MenuFestaSelecionada(festa);
                 break;
             case 10:
             	MenuGerenciarBarracas(festa);
-            	MenuFestaSelecionada();
+            	MenuFestaSelecionada(festa);
             	break;
             case 11:
                 MenuFesta();
@@ -129,19 +135,19 @@ public class Menu {
         switch (i){
             case 1:
                 empr.visualizaEmprestimos();
-                MenuFestaSelecionada();
+                MenuFestaSelecionada(festa);
                 break;
             case 2:
                 empr.inserirEmprestimo();
-                MenuFestaSelecionada();
+                MenuFestaSelecionada(festa);
                 break;
             case 3:
-                MenuFestaSelecionada();
+                MenuFestaSelecionada(festa);
                 break;
         }
     }
 
-    public static void MenuBalanco(){
+    public static void MenuBalanco(Festa festa){
         System.out.println("\n>> Gerenciar festas >> Selecionar festa >> Balanco financeiro");
         System.out.println("1) Saldo final");
         System.out.println("2) Despesas por tipo de produto/servico");
@@ -153,18 +159,18 @@ public class Menu {
         switch (i){
             case 1:
                 Balanco.saldoFinal();
-                MenuBalanco();
+                MenuBalanco(festa);
                 break;
             case 2:
                 Balanco.despesasPorServico();
-                MenuBalanco();
+                MenuBalanco(festa);
                 break;
             case 3:
                 //Balanco.Arrecadacao();
-                MenuBalanco();
+                MenuBalanco(festa);
                 break;
             case 4:
-                MenuFestaSelecionada();
+                MenuFestaSelecionada(festa);
                 break;
         }
     }
@@ -198,7 +204,7 @@ public class Menu {
                 MenuRecarga(festa);
                 break;
             case 5:
-                MenuFestaSelecionada();
+                MenuFestaSelecionada(festa);
                 break;
         }
     }
@@ -229,7 +235,7 @@ public class Menu {
                 MenuConcursos(festa);
                 break;
             case 4:
-                MenuFestaSelecionada();
+                MenuFestaSelecionada(festa);
         }
     }
     
