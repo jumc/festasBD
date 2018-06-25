@@ -7,7 +7,7 @@ public class Database {
 	static private Connection db = null;
 	static private String HOST = "jdbc:postgresql://localhost:5432/T3BD";
 	static private String USER = "postgres";
-	static private String PASS = "admin";
+	static private String PASS = "password";
 	static private Statement stmt = null;
 	
 	public static boolean open() {
