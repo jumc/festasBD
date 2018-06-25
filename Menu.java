@@ -12,7 +12,8 @@ public class Menu {
         System.out.println("SELECIONE O QUE DESEJA FAZER APERTANDO O NUMERO CORRESPONDENTE \n");
         System.out.println("1) Gerenciar festas");
         System.out.println("2) Gerenciar pessoas");
-        System.out.println("3) Sair");
+        System.out.println("3) Estatísticas finaceiras");
+        System.out.println("4) Sair");
         System.out.print("> ");
 
         int i = Keyboard.readInt();
@@ -24,6 +25,9 @@ public class Menu {
                 MenuPessoas();
                 break;
             case 3:
+                MenuBalanco();
+                break;
+            case 4:
             	System.exit(0);
         }
     }
@@ -63,11 +67,10 @@ public class Menu {
         System.out.println("4) Inserir aluguel");
         System.out.println("5) Equipamentos emprestados");
         System.out.println("6) Gerenciar produtos");
-        System.out.println("7) Balanço financeiro");
-        System.out.println("8) Recargas");
-        System.out.println("9) Gerenciar concursos");
-        System.out.println("10) Gerenciar barracas");
-        System.out.println("11) Voltar");
+        System.out.println("7) Recargas");
+        System.out.println("8) Gerenciar concursos");
+        System.out.println("9) Gerenciar barracas");
+        System.out.println("10) Voltar");
         System.out.print("> ");
 
         Evento evento = new Evento(festa);
@@ -103,20 +106,17 @@ public class Menu {
             	MenuFestaSelecionada(festa);
                 break;
             case 7:
-                MenuBalanco(festa);
-                break;
-            case 8:
                 MenuRecarga(festa);
                 break;
-            case 9:
+            case 8:
                 MenuConcursos(festa);
                 MenuFestaSelecionada(festa);
                 break;
-            case 10:
+            case 9:
             	MenuGerenciarBarracas(festa);
             	MenuFestaSelecionada(festa);
             	break;
-            case 11:
+            case 10:
                 MenuFesta();
                 break;
         }
@@ -147,30 +147,27 @@ public class Menu {
         }
     }
 
-    public static void MenuBalanco(Festa festa){
+    public static void MenuBalanco(){
         System.out.println("\n>> Gerenciar festas >> Selecionar festa >> Balanco financeiro");
         System.out.println("1) Saldo final");
-        System.out.println("2) Despesas por tipo de produto/servico");
-        System.out.println("3) Arrecadação");
-        System.out.println("4) Voltar");
+        System.out.println("2) Despesas por tipo de servico");
+        System.out.println("3) Voltar");
         System.out.print("> ");
 
         int i = Keyboard.readInt();
         switch (i){
             case 1:
                 Balanco.saldoFinal();
-                MenuBalanco(festa);
+                MenuBalanco();
                 break;
             case 2:
-                Balanco.despesasPorServico();
-                MenuBalanco(festa);
+                Balanco.despesasPorCategoria();
                 break;
             case 3:
-                //Balanco.Arrecadacao();
-                MenuBalanco(festa);
+            	MenuPrincipal();
                 break;
-            case 4:
-                MenuFestaSelecionada(festa);
+            default:
+                MenuBalanco();
                 break;
         }
     }
