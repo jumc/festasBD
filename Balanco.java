@@ -60,9 +60,12 @@ public class Balanco {
                             total -= resultAluguel.getDouble(1);
                             System.out.println(festa + " na edicao " + edicao + " teve saldo final de: R$" +  
                                     String.format("%.2f", total));
+                            
                             resultSaldo.next();
                             resultContrato.next();
                             resultProdutos.next();
+                            resultAluguel.next();
+                            resultConsumacao.next();
                         }
 	        
 		} catch (SQLException e) {
@@ -70,7 +73,7 @@ public class Balanco {
 		}
 	}
     
-    public static void despesasPorServico() {
+    public static void despesasPorCategoria() {
 		double custo;
                 int catSer;
                 String festa, edicao, categoria;
