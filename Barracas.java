@@ -11,7 +11,7 @@ public class Barracas {
     	id = Keyboard.readInt();
     	tipo = verifyBarraca(festa, id);
     	if (tipo == -1) {
-    		System.out.println("Barraca n„o encontrada!");
+    		System.out.println("Barraca nÔøΩo encontrada!");
     		return;
     	}
     	
@@ -22,7 +22,7 @@ public class Barracas {
 	
 	private static void MenuSelecionarBarraca(Festa festa, int id, int tipo) {
         System.out.println("\n>> Gerenciar festas >> Selecionar festa >> Gerenciar barracas >> Selecionar barraca");
-        System.out.println("1) Inserir respons·vel por barraca");
+        System.out.println("1) Inserir responsÔøΩvel por barraca");
         System.out.println("2) Inserir produto");
         switch (tipo) {
         	case 0:
@@ -40,7 +40,7 @@ public class Barracas {
         i = (tipo != 0 && i == 3) ? ++i : i;	//se tipo nao for comida nao tem opcao de cadastrar comida
         switch (i){
             case 1:
-            	//inserir responsavel por barraca
+            	inserirResponsavel(festa, id);
             	MenuSelecionarBarraca(festa, id, tipo);
                 break;
             case 2:
@@ -56,6 +56,54 @@ public class Barracas {
         }
 	}
 	
+	public static void inserirResponsavel(Festa festa, int id_barraca) {
+		String cpf;
+		
+    	System.out.println("Digite o CPF do respons√°vel: ");
+    	System.out.print("> ");
+    	cpf = Keyboard.readLine();
+    	verifyCPF(cpf);
+    	if (!verifyValidCPF(festa, cpf, id_barraca)) {
+    		return;
+    	}
+
+    	Database.runUpdate("INSERT INTO RESPONSAVEL_BARRACA" + 
+				" VALUES ('"+cpf+"',"+id_barraca+");");
+	}
+	
+    private static String verifyCPF(String n) {
+    	String cpf = n;
+    	while (!cpf.matches("[0-9]{3}+[.][0-9]{3}+[.][0-9]{3}+[-][0-9]{2}+")) {
+        	System.out.println("Digite o CPF no formato (XXX.XXX.XXX-XX):");
+        	System.out.print("> ");
+        	cpf = Keyboard.readLine();
+    	}
+    	
+    	return cpf;
+    }
+    
+    private static boolean verifyValidCPF(Festa festa, String cpf, int id_barraca) {
+    	
+    	ResultSet result = Database.runQuery("SELECT M.CPF FROM MEMBRO_COMISSAO M, ORGANIZACAO O WHERE (M.CPF = '"+cpf+"') AND (M.CPF = O.MEMBRO) AND (FESTA = UPPER('" + festa.getNome() + "')) AND (EDICAO = " + festa.getEdicao() + ");");
+    	try {
+			if (result.isBeforeFirst()) {
+				result = Database.runQuery("SELECT MEMBRO FROM RESPONSAVEL_BARRACA WHERE (MEMBRO = '"+cpf+"') AND (BARRACA = "+id_barraca+");");
+				if (!result.isBeforeFirst()) {
+					return true;
+				} else {
+					System.out.println("Organizador de CPF informado j√° respons√°vel por esta barraca!");
+				}
+			} else {
+	    		System.out.println("Nao foi encontrado organizador com o CPF informado na festa selecionada");
+			}
+		} catch (SQLException e) {
+    		System.out.println("Nao foi encontrado organizador com o CPF informado na festa selecionada");
+    		e.printStackTrace();
+		}
+    	
+    	return false;
+    }
+
 	private static int verifyBarraca(Festa festa, int id) {
     	ResultSet result = Database.runQuery("SELECT TIPO FROM BARRACA WHERE (ID_BARRACA = "+id+") AND (FESTA = UPPER('" + festa.getNome() + "')) AND (EDICAO = " + festa.getEdicao() + ");");
     	try {
@@ -83,14 +131,14 @@ public class Barracas {
     	}
     	
     	while (num < 0) {
-	    	System.out.println("Digite o n˙mero da barraca: ");
+	    	System.out.println("Digite o nÔøΩmero da barraca: ");
 	    	System.out.print("> ");
 	    	num = Keyboard.readInt();
 	    	if (num < 0) {
-	    		System.out.println("O n˙mero da barraca nao pode ser negativo!");
+	    		System.out.println("O nÔøΩmero da barraca nao pode ser negativo!");
 	    	} else {
 	    		if (!verifyValidNum(festa, num)) {
-	    			System.out.println("N˙mero da barraca ja existente na festa atual");
+	    			System.out.println("NÔøΩmero da barraca ja existente na festa atual");
 	    			return;
 	    		}
 	    	}
@@ -128,11 +176,11 @@ public class Barracas {
     	
     	if (tipo == 1) {
 	    	while (preco < 0) {
-		    	System.out.println("Digite o preÁo do lazer: ");
+		    	System.out.println("Digite o preÔøΩo do lazer: ");
 		    	System.out.print("> ");
 		    	preco = Keyboard.readFloat();
 		    	if (preco < 0) {
-		    		System.out.println("O preÁo nao pode ser negativo!");
+		    		System.out.println("O preÔøΩo nao pode ser negativo!");
 		    	}
 	    	}
 	    	r += Database.runUpdate("INSERT INTO LAZER" + 
