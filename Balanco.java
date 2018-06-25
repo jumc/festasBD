@@ -5,7 +5,7 @@ import java.sql.SQLException;
 //Classe que recupera do banco o balanco geral das festas
 public class Balanco {
     public static void saldoFinal() {
-		double totalArrecadado, totalContrato, totalProduto;
+		double total;
                 String festa, edicao;
 		
 		ResultSet resultSaldo = Database.runQuery("SELECT F.NOME, F.EDICAO, SUM(COALESCE(R.VALOR, 0)) FROM " +
@@ -24,9 +24,20 @@ public class Balanco {
                             "ON F.NOME = P.FESTA AND F.EDICAO = P.EDICAO " +
                         "GROUP BY F.NOME, F.EDICAO " +
                         "ORDER BY F.NOME, F.EDICAO;");
+                ResultSet resultConsumacao = Database.runQuery("SELECT COALESCE(CONSUMACAO, 0) * count(P.COD_CARTAO) FROM\n" +
+                        "FESTA F LEFT JOIN PARTICIPANTE P\n" +
+                            "ON F.NOME = P.FESTA AND F.EDICAO = P.EDICAO\n" +
+                        "GROUP BY F.NOME, F.EDICAO\n" +
+                        "ORDER BY F.NOME, F.EDICAO;");
+                
+                ResultSet resultAluguel = Database.runQuery("SELECT COALESCE(A.VALOR, 0) FROM\n" +
+                        "FESTA F LEFT JOIN ALUGUEL A\n" +
+                            "ON F.NOME = A.FESTA AND F.EDICAO = A.EDICAO\n" +
+                        "ORDER BY F.NOME, F.EDICAO;");
 		try {
 			if (!resultSaldo.isBeforeFirst() || !resultContrato.isBeforeFirst()
-                                            || !resultProdutos.isBeforeFirst()) {
+                            || !resultProdutos.isBeforeFirst() || !resultConsumacao.isBeforeFirst()
+                                                               || !resultAluguel.isBeforeFirst() ){
 			    System.out.println("Nao há nenhuma festa cadastrada.");
 			    return;
 			}
@@ -34,16 +45,21 @@ public class Balanco {
                         resultSaldo.next();
                         resultContrato.next();
                         resultProdutos.next();
+                        resultAluguel.next();
+                        resultConsumacao.next();
                             
                         while(!resultSaldo.isAfterLast() && !resultContrato.isAfterLast()
-                                                        && !resultProdutos.isAfterLast()){
+                              && !resultProdutos.isAfterLast() && !resultConsumacao.isAfterLast()
+                                                               && !resultAluguel.isAfterLast()){
                             festa = resultSaldo.getString(1);
                             edicao = resultSaldo.getString(2);
-                            totalArrecadado = resultSaldo.getDouble(3);
-                            totalContrato = resultContrato.getDouble(1);
-                            totalProduto = resultProdutos.getDouble(1);
+                            total = resultSaldo.getDouble(3);
+                            total += resultContrato.getDouble(1);
+                            total -= resultProdutos.getDouble(1);
+                            total += resultConsumacao.getDouble(1);
+                            total -= resultAluguel.getDouble(1);
                             System.out.println(festa + " na edicao " + edicao + " teve saldo final de: R$" +  
-                                    String.format("%.2f", totalArrecadado + totalContrato - totalProduto));
+                                    String.format("%.2f", total));
                             resultSaldo.next();
                             resultContrato.next();
                             resultProdutos.next();
