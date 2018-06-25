@@ -146,7 +146,7 @@ public class Evento {
 						contador++;
 						
 							}
-				ExcluirEvento();
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -259,8 +259,7 @@ public class Evento {
 						        break;
 								}
 							
-						
-							contador++;	
+						contador++;	
 				} 
 				
 			} catch (SQLException e) {
