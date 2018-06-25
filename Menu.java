@@ -152,13 +152,16 @@ public class Menu {
         int i = Keyboard.readInt();
         switch (i){
             case 1:
-                // funcao saldo
+                Balanco.saldoFinal();
+                MenuBalanco();
                 break;
             case 2:
-                //funcao despesas
+                Balanco.despesasPorServico();
+                MenuBalanco();
                 break;
             case 3:
-                //funcao arrecadacao
+                //Balanco.Arrecadacao();
+                MenuBalanco();
                 break;
             case 4:
                 MenuFestaSelecionada();

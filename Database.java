@@ -5,7 +5,7 @@ import java.sql.*;
 public class Database {
 	
 	static private Connection db = null;
-	static private String HOST = "jdbc:postgresql://localhost:5432/T3BD";
+	static private String HOST = "jdbc:postgresql://localhost:5432/postgres";
 	static private String USER = "postgres";
 	static private String PASS = "admin";
 	static private Statement stmt = null;
