@@ -148,7 +148,7 @@ public class Menu {
     }
 
     public static void MenuBalanco(){
-        System.out.println("\n>> Gerenciar festas >> Selecionar festa >> Balanco financeiro");
+        System.out.println("\n>> Estatisticas financeiras");
         System.out.println("1) Saldo final");
         System.out.println("2) Despesas por tipo de servico");
         System.out.println("3) Voltar");
@@ -162,6 +162,7 @@ public class Menu {
                 break;
             case 2:
                 Balanco.despesasPorCategoria();
+                MenuBalanco();
                 break;
             case 3:
             	MenuPrincipal();
